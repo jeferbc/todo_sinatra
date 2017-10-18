@@ -1,0 +1,27 @@
+<h1>Tasks</h1>
+<a href="/tasks/new" class="btn btn-success">New Task</a>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>name</td>
+      <td>Done</td>
+      <td>Actions</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task["id"] %></td>
+        <td><%= task["title"] %></td>
+        <td><%= task['done'] %></td>
+        <td><%= erb :delete_form, :layout => false, :locals => { :task_id => task['id'] } %></td>
+        <td>
+          <% unless task["done"] %>
+            <%= erb :update_form, :layout => false, :locals => { :task_id => task['id'] } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
